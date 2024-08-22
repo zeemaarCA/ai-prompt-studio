@@ -32,7 +32,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 					onClick={handleProfileClick}
 				>
 					<Image
-						src={post.creator.image}
+						src={post?.creator?.image}
 						alt="user_image"
 						width={40}
 						height={40}
@@ -41,9 +41,9 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 
 					<div className="flex flex-col">
 						<h3 className="font-lora text-base font-semibold">
-							{post.creator.username}
+							{post?.creator?.username}
 						</h3>
-						<p className="font-inter text-xs">{post.creator.email}</p>
+						<p className="font-inter text-xs">{post?.creator?.email}</p>
 					</div>
 				</div>
 
@@ -62,7 +62,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 				</div>
 			</div>
 
-			<p className="my-4 text-sm">{post.prompt}</p>
+			<p className="my-4 text-sm">{post?.prompt}</p>
 			<p className="font-inter text-sm blue_gradient border-solid border-0 border-t-2 pt-3 border-gray-700">
 				{post.tag.split(",").map((tag, index) => (
 					<span
@@ -74,7 +74,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 					</span>
 				))}
 			</p>
-			{session?.user.id === post.creator._id && pathName === "/profile" && (
+			{session?.user.id === post?.creator?._id && pathName === "/profile" && (
 				<div className="mt-5 flex gap-4 border-t border-gray-100 pt-3">
 					<p
 						className="font-sora text-sm text-green-400 cursor-pointer"
