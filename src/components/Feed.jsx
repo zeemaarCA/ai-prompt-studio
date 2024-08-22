@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import PromptCard from "./PromptCard";
 
-const PromptCardList = ({ data, handleTagClick, loading }) => {
+const PromptCardList = ({ data, handleTagClick }) => {
 	return (
 		<>
 			{/* {loading ? (
@@ -40,7 +40,7 @@ const PromptCardList = ({ data, handleTagClick, loading }) => {
 
 const Feed = () => {
 	const [allPosts, setAllPosts] = useState([]);
-	const [loading, setLoading] = useState(false);
+	// const [loading, setLoading] = useState(false);
 
 	// Search states
 	const [searchText, setSearchText] = useState("");
@@ -49,11 +49,11 @@ const Feed = () => {
 
 	const fetchPosts = async () => {
 		setLoading(true);
-		const response = await fetch(`/api/prompt?timestamp=${new Date().getTime()}`);
+		const response = await fetch("/api/prompt");
 		const data = await response.json();
 
 		setAllPosts(data);
-		setLoading(false);
+		// setLoading(false);
 	};
 
 	useEffect(() => {
@@ -120,13 +120,13 @@ const Feed = () => {
 				<PromptCardList
 					data={searchedResults}
 					handleTagClick={handleTagClick}
-					loading={loading}
+					// loading={loading}
 				/>
 			) : (
 				<PromptCardList
 					data={allPosts}
 					handleTagClick={handleTagClick}
-					loading={loading}
+					// loading={loading}
 				/>
 			)}
 		</section>
