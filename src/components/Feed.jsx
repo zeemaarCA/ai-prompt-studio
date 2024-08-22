@@ -7,7 +7,7 @@ import PromptCard from "./PromptCard";
 const PromptCardList = ({ data, handleTagClick, loading }) => {
 	return (
 		<>
-			{loading ? (
+			{/* {loading ? (
 				<div className="mt-16 grid grid-cols-12 gap-3">
 					{[...Array(3)].map((_, index) => (
 						<div key={index} className="flex col-span-4 flex-col gap-4">
@@ -22,7 +22,7 @@ const PromptCardList = ({ data, handleTagClick, loading }) => {
 						</div>
 					))}
 				</div>
-			) : (
+			) : ( */}
 				<div className="mt-16 grid grid-cols-12 gap-3">
 					{data.map((post) => (
 						<PromptCard
@@ -32,7 +32,7 @@ const PromptCardList = ({ data, handleTagClick, loading }) => {
 						/>
 					))}
 				</div>
-			)}
+			{/* )} */}
 		</>
 	);
 };
