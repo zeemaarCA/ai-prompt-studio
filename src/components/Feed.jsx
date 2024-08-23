@@ -50,6 +50,12 @@ const Feed = () => {
 	const fetchPosts = async () => {
 		setLoading(true);
 		const response = await fetch("/api/prompt");
+		if (response.ok) {
+			console.log(response)
+		}
+		else {
+			console.log("there is problem with api");
+		}
 		const data = await response.json();
 
 		setAllPosts(data);
