@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 
 import PromptCard from "./PromptCard";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data, handleTagClick, loading }) => {
 	return (
 		<>
-			{/* {loading ? (
+			{loading ? (
 				<div className="mt-16 grid grid-cols-12 gap-3">
 					{[...Array(3)].map((_, index) => (
-						<div key={index} className="flex col-span-4 flex-col gap-4">
+						<div key={index} className="flex col-span-12 sm:col-span-6 lg:col-span-4 flex-col gap-4">
 							<div className="flex items-center gap-4">
 								<div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>
 								<div className="flex flex-col gap-4">
@@ -22,8 +22,8 @@ const PromptCardList = ({ data, handleTagClick }) => {
 						</div>
 					))}
 				</div>
-			) : ( */}
-				<div className="mt-16 grid grid-cols-12 gap-3">
+			) : (
+				<div className="mt-16 grid grid-cols-12 gap-3 container mx-auto">
 					{data.map((post) => (
 						<PromptCard
 							key={post._id}
@@ -32,7 +32,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 						/>
 					))}
 				</div>
-			{/* )} */}
+			)}
 		</>
 	);
 };
@@ -40,7 +40,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
 	const [allPosts, setAllPosts] = useState([]);
-	// const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	// Search states
 	const [searchText, setSearchText] = useState("");
@@ -48,12 +48,12 @@ const Feed = () => {
 	const [searchedResults, setSearchedResults] = useState([]);
 
 	const fetchPosts = async () => {
-		// setLoading(true);
+		setLoading(true);
 		const response = await fetch("/api/prompt");
 		const data = await response.json();
 
 		setAllPosts(data);
-		// setLoading(false);
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -120,13 +120,13 @@ const Feed = () => {
 				<PromptCardList
 					data={searchedResults}
 					handleTagClick={handleTagClick}
-					// loading={loading}
+					loading={loading}
 				/>
 			) : (
 				<PromptCardList
 					data={allPosts}
 					handleTagClick={handleTagClick}
-					// loading={loading}
+					loading={loading}
 				/>
 			)}
 		</section>
