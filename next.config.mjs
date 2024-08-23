@@ -4,10 +4,6 @@ const nextConfig = {
     domains: ['lh3.googleusercontent.com'],
   },
   experimental: {
-    staleTimes: {
-      dynamic: 0,
-      static: 0,
-    },
     missingSuspenseWithCSRBailout: false,
   },
 };
