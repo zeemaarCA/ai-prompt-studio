@@ -5,8 +5,10 @@ module.exports = {
   },
 
   daisyui: {
-    themes: ["dark"],
+    themes: ["dark", "light"],
   },
+
+  darkMode: ['class', '[data-theme="dark"]'],
 
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",

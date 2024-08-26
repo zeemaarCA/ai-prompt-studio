@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { FaRegUser } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function Home() {
 	const { data: session } = useSession();
@@ -31,7 +32,7 @@ export default function Home() {
 			<section className="w-full py-12 md:py-24 lg:py-32 flex justify-center">
 				<div className="container px-4 md:px-6 flex flex-col items-center text-center space-y-6 mt-12">
 					<div className="space-y-4 text-center">
-						<h1 className="text-4xl font-bold tracking-tighter text-white sm:text-5xl md:text-6xl/none">
+						<h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl/none">
 							Discover & Share
 							<br className="max-md:hidden" />
 							<span className="text_gradient text-center">
@@ -39,7 +40,7 @@ export default function Home() {
 								AI-Powered Prompts
 							</span>
 						</h1>
-						<p className="max-w-[700px] text-white md:text-xl mx-auto">
+						<p className="max-w-[700px] md:text-xl mx-auto">
 							Prompt Studio is an open-source AI prompting tool for modern world to
 							discover, create and share creative prompts
 						</p>

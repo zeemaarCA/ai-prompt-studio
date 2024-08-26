@@ -12,6 +12,7 @@ const MyProfile = () => {
   const { data: session, status } = useSession();
 
   const [myPosts, setMyPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Only redirect if the session status is "authenticated" or "unauthenticated"
@@ -25,10 +26,19 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${session?.user.id}/posts`);
-      const data = await response.json();
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/users/${session?.user.id}/posts`);
+        const data = await response.json();
+        setLoading(false);
+        setMyPosts(data);
 
-      setMyPosts(data);
+      } catch (error) {
+        toast.error("Failed to fetch posts");
+      }
+      finally {
+        setLoading(false);
+      }
     };
 
     if (session?.user.id) fetchPosts();
@@ -54,6 +64,8 @@ const MyProfile = () => {
           method: "DELETE",
         });
 
+        toast.success("Prompt Deleted Successfully")
+
         const filteredPosts = myPosts.filter((item) => item._id !== post._id);
 
         setMyPosts(filteredPosts);
@@ -64,12 +76,14 @@ const MyProfile = () => {
   };
 
   return (
+
     <Profile
       name='My'
       desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
+      loading={loading}
     />
   );
 };

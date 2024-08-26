@@ -25,7 +25,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 	};
 
 	return (
-		<div className="col-span-12 sm:col-span-6 lg:col-span-4 glass-effect rounded-md p-4 flex flex-col justify-between">
+		<div className="col-span-12 sm:col-span-6 lg:col-span-4 glass-effect rounded-md p-4 flex flex-col justify-start">
 			<div className="flex justify-between items-start gap-5">
 				<div
 					className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
@@ -62,8 +62,8 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 				</div>
 			</div>
 
-			<p className="my-4 text-sm">{post?.prompt}</p>
-			<p className="font-inter text-sm blue_gradient border-solid border-0 border-t-2 pt-3 border-gray-700">
+			<p className="my-4 text-sm self-start">{post?.prompt}</p>
+			<p className="font-inter text-sm blue_gradient border-solid border-0 border-t-2 pt-3 border-gray-500 mt-auto">
 				{post.tag.split(",").map((tag, index) => (
 					<span
 						key={index}
@@ -77,13 +77,13 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 			{session?.user.id === post?.creator?._id && pathName === "/profile" && (
 				<div className="mt-5 flex gap-4 border-t border-gray-100 pt-3">
 					<p
-						className="font-sora text-sm text-green-400 cursor-pointer"
+						className="edit-btn"
 						onClick={handleEdit}
 					>
 						Edit
 					</p>
 					<p
-						className="font-sora text-sm text-red-500 cursor-pointer"
+						className="delete-btn"
 						onClick={handleDelete}
 					>
 						Delete

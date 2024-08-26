@@ -1,15 +1,18 @@
 "use client";
-
+import { ThemeToggle } from "@components/ThemeToggle";
 import Link from "next/link";
 import { FaRegUser } from "react-icons/fa";
 import { BiPencil } from "react-icons/bi";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import { signoutSuccess } from "@store/user/userSlice";
 
 export default function Navbar() {
 	const [providers, setProviders] = useState(null);
 	const [loading, setLoading] = useState(false);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const setupProviders = async () => {
@@ -28,27 +31,15 @@ export default function Navbar() {
 		});
 	};
 
+	const handleSignOut = () => {
+    signOut().then(() => {
+      dispatch(signoutSuccess());
+    });
+  };
+
 	return (
-		<div className="navbar px-0 py-3">
-			<div className="navbar-start">
-				<div className="dropdown">
-					<div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="h-5 w-5"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-						>
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth="2"
-								d="M4 6h16M4 12h8m-8 6h16"
-							/>
-						</svg>
-					</div>
-				</div>
+		<div className="navbar justify-between px-0 py-3">
+			<div className="">
 				<Link href="/" className="btn btn-ghost text-xl text_gradient">
 					<Image
 						src="/assets/images/logo.svg"
@@ -59,8 +50,9 @@ export default function Navbar() {
 				</Link>
 			</div>
 			{/* {alert(session)} */}
-			<div className="navbar-end">
+			<div className="">
 				<div className="flex items-center pr-3 gap-3">
+					<ThemeToggle />
 					{session?.user ? (
 						<>
 							<Link href="/create-prompt" className="btn btn-gradient">
@@ -88,7 +80,7 @@ export default function Navbar() {
 								>
 									<li>
 										<Link
-											className="justify-between text-gray-100"
+											className="justify-between text-gray-800 dark:text-gray-100"
 											href="/profile"
 										>
 											Profile
@@ -98,8 +90,8 @@ export default function Navbar() {
 									<li>
 										<button
 											type="button"
-											onClick={() => signOut()}
-											className="border-0 bg-transparent font-medium text-gray-100"
+											onClick={handleSignOut}
+											className="border-0 bg-transparent font-medium"
 										>
 											Sign Out
 										</button>
@@ -118,7 +110,7 @@ export default function Navbar() {
 										disabled={loading}
 									>
 										{loading ? (
-												<span className="loading loading-spinner"></span>
+											<span className="loading loading-spinner"></span>
 										) : (
 											<>
 												<FaRegUser /> Sign in

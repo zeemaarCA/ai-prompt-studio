@@ -3,6 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from "@components/Form";
+import toast from "react-hot-toast";
 
 const UpdatePrompt = () => {
   const router = useRouter();
@@ -11,16 +12,23 @@ const UpdatePrompt = () => {
 
   const [post, setPost] = useState({ prompt: "", tag: "" });
   const [submitting, setIsSubmitting] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
     const getPromptDetails = async () => {
-      const response = await fetch(`/api/prompt/${promptId}`);
-      const data = await response.json();
+      try {
+        setFetching(true);
+        const response = await fetch(`/api/prompt/${promptId}`);
+        const data = await response.json();
+        setFetching(false);
 
-      setPost({
-        prompt: data.prompt,
-        tag: data.tag,
-      });
+        setPost({
+          prompt: data.prompt,
+          tag: data.tag,
+        });
+      } catch (error) {
+        toast.error("Prompt not found");
+      }
     };
 
     if (promptId) getPromptDetails();
@@ -30,7 +38,9 @@ const UpdatePrompt = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!promptId) return alert("Missing PromptId!");
+    if (!promptId) {
+      return toast.error("Prompt ID not found");
+    }
 
     try {
       const response = await fetch(`/api/prompt/${promptId}`, {
@@ -59,6 +69,7 @@ const UpdatePrompt = () => {
         setPost={setPost}
         submitting={submitting}
         handleSubmit={updatePrompt}
+        fetching={fetching}
       />
     </Suspense>
   );

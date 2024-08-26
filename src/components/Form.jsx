@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
+const Form = ({ type, post, setPost, submitting, handleSubmit, fetching }) => {
 	return (
 		<section className="max-w-full px-6 sm:px-0 sm:max-w-md items-center flex flex-col mx-auto">
 			<h1 className="head_text text-center mb-5">
@@ -23,7 +23,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 						className="textarea textarea-bordered resize-none placeholder:text-gray-300 placeholder:font-poppins"
 						value={post.prompt}
 						onChange={(e) => setPost({ ...post, prompt: e.target.value })}
-						placeholder="Write your post here"
+						placeholder= {fetching ? "Fetching Prompt..." : "Write your prompt here..."}
 						required
 						rows="5"
 					></textarea>
@@ -38,7 +38,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
 					</span>
 					<input
 						type="text"
-						placeholder="#Tag"
+						placeholder= {fetching ? "Fetching tags..." : "#tag (commma separated - without hashtag)"}
             className="input input-bordered placeholder:text-gray-300 placeholder:text-sm placeholder:font-poppins"
             value={post.tag}
 						onChange={(e) => setPost({ ...post, tag: e.target.value })}
