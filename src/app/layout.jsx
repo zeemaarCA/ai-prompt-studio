@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="font-sora">
         <ReduxProvider>
-          <ThemeProvider>
+          <ThemeProvider defaultTheme="dark">
             <AuthProvider>
               <div className="main">
                 <div className="gradient" />
