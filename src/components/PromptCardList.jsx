@@ -7,7 +7,7 @@ export default function PromptCardList({ data, handleTagClick, loading }) {
 					{[...Array(6)].map((_, index) => (
 						<div
 							key={index}
-							className="flex col-span-12 sm:col-span-6 lg:col-span-4 flex-col gap-4"
+							className="flex col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 flex-col gap-4"
 						>
 							<div className="flex items-center gap-4">
 								<div className="skeleton h-16 w-16 shrink-0 rounded-full"></div>

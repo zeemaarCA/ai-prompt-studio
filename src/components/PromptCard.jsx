@@ -25,7 +25,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
 	};
 
 	return (
-		<div className="col-span-12 sm:col-span-6 lg:col-span-4 glass-effect rounded-md p-4 flex flex-col justify-start">
+		<div className="col-span-12 sm:col-span-6 lg:col-span-4 xl:col-span-3 glass-effect rounded-md p-4 flex flex-col justify-start">
 			<div className="flex justify-between items-start gap-5">
 				<div
 					className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
